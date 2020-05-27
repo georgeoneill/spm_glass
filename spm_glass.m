@@ -39,9 +39,9 @@ if ~isfield(S, 'cmap'),         S.cmap = 'gray'; end
 if ~isfield(S, 'detail'),       S.detail = 1; end
 if ~isfield(S, 'grid'),         S.grid = false; end
 
-
-V = spm_vol(fullfile(spm('dir'),'canonical','avg152T1.nii'));
-pos = ceil(V.mat \ [pos';ones(1,size(pos,2))])';
+M = [-2 0 0 92;0 2 0 -128;0 0 2 -74;0 0 0 1];
+dim = [91 109 91];
+pos = ceil(M \ [pos';ones(1,size(pos,2))])';
 
 if sum(X<0) & sum(X>0)
     div = 1;
@@ -59,7 +59,7 @@ end
 
 % saggital plane
 %----------------------------------------------------------------------
-p_sag = NaN(V.dim(2),V.dim(3));
+p_sag = NaN(dim(2),dim(3));
 
 for ii = 1:length(id)
     
@@ -71,7 +71,7 @@ end
 
 % coronal plane
 %----------------------------------------------------------------------
-p_cor = NaN(V.dim(1),V.dim(3));
+p_cor = NaN(dim(1),dim(3));
 
 for ii = 1:length(id)
     
@@ -84,7 +84,7 @@ end
 
 % axial plane
 %----------------------------------------------------------------------
-p_axi = NaN(V.dim(2),V.dim(1));
+p_axi = NaN(dim(2),dim(1));
 
 for ii = 1:length(id)
     
