@@ -41,7 +41,7 @@ if ~isfield(S, 'grid'),         S.grid = false; end
 
 
 V = spm_vol(fullfile(spm('dir'),'canonical','avg152T1.nii'));
-pos = ceil(ft_warp_apply(inv(V.mat),pos));
+pos = ceil(V.mat \ [pos';ones(1,size(pos,2))])';
 
 if sum(X<0) & sum(X>0)
     div = 1;
