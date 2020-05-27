@@ -138,7 +138,7 @@ end
 
 function overlay_glass_brain(orient,dark,detail)
 
-load(fullfile(spm('dir'),'glass_brain.mat'));
+load(fullfile(fileparts(mfilename('fullpath')),'glass_brain.mat'));
 
 dat = glass.(orient);
 
