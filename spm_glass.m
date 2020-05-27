@@ -41,7 +41,7 @@ if ~isfield(S, 'grid'),         S.grid = false; end
 
 M = [-2 0 0 92;0 2 0 -128;0 0 2 -74;0 0 0 1];
 dim = [91 109 91];
-pos = ceil(M \ [pos';ones(1,size(pos,2))])';
+pos = ceil(M \ [pos';ones(1,size(pos,1))])';
 
 if sum(X<0) & sum(X>0)
     div = 1;
