@@ -43,7 +43,7 @@ M = [-2 0 0 92;0 2 0 -128;0 0 2 -74;0 0 0 1];
 dim = [91 109 91];
 pos = ceil(M \ [pos';ones(1,size(pos,1))])';
 
-if sum(X<0) & sum(X>0)
+if any(X<0) && any(X>0)
     div = 1;
     S.cmap = 'rdbu';
 else
@@ -97,9 +97,9 @@ end
 
 % combine and plot
 %---------------------------------------------------------------------
-
 p_all = [rot90(p_sag,1) fliplr(rot90(p_cor,1));...
     rot90(p_axi,1) NaN(size(rot90(p_cor,1)))];
+p_all(isnan(p_all)) = 0;
 imagesc(p_all)
 set(gca,'XTickLabel',{},'YTickLabel',{});
 axis image
@@ -168,15 +168,12 @@ for ii = 1:length(dat.paths)
             pts = pth.items(jj).pts;
             v = [generate_bezier(pts) ones(10,1)];
             v2 = v*xform;
-            f = [1:(length(v)-1); 2:length(v)]';
-            
             if dark
                 c = 1 - hex2rgb(pth.edgecolor);
             else
                 c = hex2rgb(pth.edgecolor);
             end
-            
-            patch('faces',f,'vertices',v2(:,1:2),'linewidth',pth.linewidth,'edgecolor',c);
+            line(v2(:,1),v2(:,2),'LineWidth',pth.linewidth,'Color',c);
         end
     end
 end
