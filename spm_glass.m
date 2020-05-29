@@ -16,7 +16,7 @@ function fig = spm_glass(X,pos,varargin)
 %__________________________________________________________________________
 % Copyright (C) 2020 Wellcome Centre for Human Neuroimaging
 
-% George O'Neill
+% George O'Neill & Guillaume Flandin
 % $Id$
 
 % prep
